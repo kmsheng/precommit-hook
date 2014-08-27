@@ -17,7 +17,7 @@ var longest = 0;
 var projectRoot = '{{projectRoot}}'; // lame templating so this gets populated correctly
 var package = require(path.join(projectRoot, 'package.json'));
 var scripts = package.scripts;
-var config = package.precommit;
+var config = package['{{hook}}'];
 
 // set up environment
 var pathKey;
@@ -110,6 +110,5 @@ config.forEach(function (cmd, i) {
         task.call(null, tasks[i + 1]);
     };
 });
-
-console.log('running pre-commit checks...');
+console.log('running {{hook}} checks...');
 tasks[0]();
